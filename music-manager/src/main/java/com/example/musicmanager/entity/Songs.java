@@ -59,5 +59,12 @@ public class Songs {
 	@Column(name = "update_time")
 	private Date updateTime;
 
-
+	public Songs(int idSong, String artist, User user, String nameSong, String codeSong, Date updateTime) {
+		this.idSong = idSong;
+		this.artist = artist;
+		this.user = user;
+		this.nameSong = nameSong;
+		this.codeSong = codeSong;
+		this.updateTime = updateTime;
+	}
 }

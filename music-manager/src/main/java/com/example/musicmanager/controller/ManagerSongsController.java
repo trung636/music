@@ -19,23 +19,27 @@ public class ManagerSongsController {
     private ManagerSongsService managerSongService;
 
     @GetMapping(EventPaths.MY_SONG)
-    public List<Songs> getAllMySong(Principal principal){
+    public List<Songs> getAllMySong(){
         List<Songs> listSong = managerSongService.getAllMySongs("trung");
-        if(listSong.isEmpty()){
+        if(listSong == null){
             throw new NotFoundException("my song is empty!!");
         }
         return listSong;
     }
 
     @PostMapping(EventPaths.MY_SONG)
-    public String saveAndUpdateMySong(@Valid @RequestBody Songs songs, Principal principal){
-        String result = managerSongService.saveAndUpdateMySong(songs, "trung");
+    public String saveAndUpdateMySong(@Valid @RequestBody Songs songs){
+        String result = managerSongService.saveAndUpdateMySong(songs,"trung");
         return "success";
     }
 
     @GetMapping(EventPaths.MY_SONG +"/{idSong}" )
     public Songs getMySong(@PathVariable(name = "idSong") int idSong){
-        return managerSongService.getMySongs(idSong);
+        Songs song = managerSongService.getMySongs(idSong);
+        if(song == null){
+            throw new NotFoundException("The song not found!!");
+        }
+        return song;
     }
 
     @DeleteMapping(EventPaths.MY_SONG)
