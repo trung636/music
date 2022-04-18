@@ -45,6 +45,9 @@ public class ManagerSongsServiceImp implements ManagerSongsService {
     @Override
     public Songs getMySongs(int idSong) {
         Optional<Songs> songs= songsRepository.findById(idSong);
+        if(!songs.isPresent()){
+            return null;
+        }
         return songs.get();
     }
 

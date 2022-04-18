@@ -3,7 +3,6 @@ package com.example.musicmanager.controller;
 import com.example.musicmanager.entity.Songs;
 import com.example.musicmanager.entity.User;
 import com.example.musicmanager.service.ManagerSongsService;
-import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,8 +16,6 @@ import org.webjars.NotFoundException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-
-import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(MockitoExtension.class)
 class ManagerSongsControllerTest {
@@ -38,6 +35,7 @@ class ManagerSongsControllerTest {
 
     );
     private static List<Songs> emptyList = null;
+    private static Songs songNull = null;
 
     @Test
     void getAllMySong() {
@@ -51,7 +49,7 @@ class ManagerSongsControllerTest {
     @Test
     void testListNullWhenGetAllMySong(){
         Mockito.when(songsService.getAllMySongs(user.getUsername())).thenReturn(emptyList);
-        Assertions.assertThrows(NotFoundException.class, (Executable) managerSongsController.getAllMySong());
+        Assertions.assertThrows(NotFoundException.class, () -> managerSongsController.getAllMySong());
     }
 
     @Test
@@ -75,14 +73,15 @@ class ManagerSongsControllerTest {
 
     @Test
     void testGetMySongIsNull(){
-        Mockito.when(songsService.getMySongs(1)).thenReturn(null);
+        Mockito.when(songsService.getMySongs(1)).thenReturn(songNull);
 
-        Assertions.assertThrows(NotFoundException.class, (Executable) managerSongsController.getMySong(1));
+        Assertions.assertThrows(NotFoundException.class, () -> managerSongsController.getMySong(1));
 
     }
 
     @Test
     void deleteMySong() {
+
     }
 
     @Test

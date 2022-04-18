@@ -22,7 +22,7 @@ public class ManagerSongsController {
     public List<Songs> getAllMySong(){
         List<Songs> listSong = managerSongService.getAllMySongs("trung");
         if(listSong == null){
-            throw new NotFoundException("my song is empty!!");
+            throw new NotFoundException("My song is empty!!");
         }
         return listSong;
     }
