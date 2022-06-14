@@ -20,6 +20,7 @@ public class UserController {
     public String checkLogin(HttpServletResponse response){
         return response.getHeader("token");
     }
+    
     @RequestMapping(path = "/error", method = RequestMethod.GET)
     public String errorPage() {
         return "error";
